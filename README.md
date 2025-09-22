@@ -19,7 +19,7 @@ const ms_compress_dependency = b.dependency("ms_compress", .{
     .target = target,
     .optimize = optimize,
 });
-your_exe.linkLibrary(ms-compress_dependency.artifact("ms_compress"));
+your_exe.linkLibrary(ms_compress_dependency.artifact("ms_compress"));
 ```
 
 And use the library like this:

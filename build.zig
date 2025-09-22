@@ -15,7 +15,7 @@ pub fn build(b: *std.Build) !void {
     });
     ms_compress.addCSourceFiles(.{
         .files = ms_compress_sources,
-        .flags = &.{},
+        .flags = &.{ "-DMSCOMP_WITH_ERROR_MESSAGES", "-fno-sanitize=undefined" },
         .language = .cpp,
         .root = upstream.path(""),
     });
