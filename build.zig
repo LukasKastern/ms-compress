@@ -13,17 +13,17 @@ pub fn build(b: *std.Build) !void {
             .optimize = optimize,
         }),
     });
-    ms_compress.addCSourceFiles(.{
+    ms_compress.root_module.addCSourceFiles(.{
         .files = ms_compress_sources,
         .flags = &.{ "-DMSCOMP_WITH_ERROR_MESSAGES", "-fno-sanitize=undefined" },
         .language = .cpp,
         .root = upstream.path(""),
     });
-    ms_compress.addIncludePath(upstream.path("include"));
+    ms_compress.root_module.addIncludePath(upstream.path("include"));
     ms_compress.installHeadersDirectory(upstream.path("include"), "", .{});
 
-    ms_compress.linkLibC();
-    ms_compress.linkLibCpp();
+    ms_compress.root_module.link_libc = true;
+    ms_compress.root_module.link_libcpp = true;
 
     b.installArtifact(ms_compress);
 }
